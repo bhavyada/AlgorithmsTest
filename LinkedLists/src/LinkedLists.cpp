@@ -46,28 +46,8 @@ void PrintLinkedList(struct Node* head)
 
 struct Node* MergeLinkedLists(struct Node *l1, struct Node *l2)
 {
-	struct Node *head = NULL;
-	struct Node *curr = NULL;
-	if (l1)
-	{
-		if (l2 && (l2->value < l1->value))
-		{
-			head = l2;
-			l2 = l2->next;
-		}
-		else
-		{
-			head = l1;
-			l1 = l1->next;
-		}
-	}
-	else if (l2)
-	{
-		head = l2;
-		l2 = l2->next;
-	}
-
-	curr = head;
+	struct Node temp;
+	struct Node *curr = &temp;
 
 	while ((l1) && (l2))
 	{
@@ -93,7 +73,7 @@ struct Node* MergeLinkedLists(struct Node *l1, struct Node *l2)
 		curr->next = l2;
 	}
 
-	return head;
+	return temp.next;
 }
 
 void LinkedListReverse(struct Node **head)
