@@ -16,3 +16,11 @@
 *.ini
 *.sc
 *.pdom
+*.lock
+*.zip
+.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+.metadata/.plugins/org.eclipse.cdt.make.core/specs.cpp
+.metadata/.plugins/org.eclipse.cdt.managedbuilder.core/buildState/LinkedLists/1534172124
+.metadata/.plugins/org.eclipse.cdt.managedbuilder.core/buildState/LinkedLists/LinkedLists
+*.exe
+*.o
