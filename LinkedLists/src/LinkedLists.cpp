@@ -153,6 +153,27 @@ Node* ReverseKAlternateNodes(Node *head, int k)
 	return head;
 }
 
+//Split the nodes of the given list into front and back halves,
+//and return the two lists using the reference parameters.
+//If the length is odd, the extra node should go in the front list.
+void FrontBackSplit(struct Node* source, struct Node** frontRef, struct Node** backRef)
+{
+	if (source == NULL) {*frontRef = NULL; *backRef = NULL; return;}
+
+	struct Node* slow = source;
+	struct Node* fast = source;
+	while ((fast->next != NULL) && (fast->next->next != NULL))
+	{
+		fast = fast->next;
+		fast = fast->next;
+		slow = slow->next;
+	}
+
+	*backRef = slow->next;
+	slow->next = NULL;
+	*frontRef = source;
+}
+
 int main(void)
 {
 	struct Node* node7 = (Node *)malloc(sizeof(struct Node));
@@ -224,9 +245,16 @@ int main(void)
 //	PrintLinkedList(head01);
 //	struct Node* mergedHead = MergeLinkedLists(head1, head01);
 //	PrintLinkedList(mergedHead);
+//
+//	printf ("ReverseKAlternateNodes\n");
+//	PrintLinkedList(ReverseKAlternateNodes(head1, 2));
 
-	printf ("ReverseKAlternateNodes\n");
-	PrintLinkedList(ReverseKAlternateNodes(head1, 2));
+	printf ("FrontBackSplit\n");
+	struct Node *front;
+	struct Node *back;
+	FrontBackSplit(head1, &front, &back);
+	PrintLinkedList(front);
+	PrintLinkedList(back);
 
 	puts("!!!Linked Lists!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
