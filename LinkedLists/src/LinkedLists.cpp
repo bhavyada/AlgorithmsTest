@@ -164,8 +164,7 @@ void FrontBackSplit(struct Node* source, struct Node** frontRef, struct Node** b
 	struct Node* fast = source;
 	while ((fast->next != NULL) && (fast->next->next != NULL))
 	{
-		fast = fast->next;
-		fast = fast->next;
+		fast = fast->next->next;
 		slow = slow->next;
 	}
 
