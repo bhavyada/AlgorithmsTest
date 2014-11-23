@@ -139,7 +139,7 @@ void BottomToTop(Node *head)
 	}
 }
 
-void BinaryTreeMirror(Node *head)
+void BinaryTreeMirrorNoRecursion(Node *head)
 {
 	NodeStack memStack;
 
@@ -163,7 +163,19 @@ void BinaryTreeMirror(Node *head)
 		}
 	}
 
-	BottomToTop(head);
+	TopToBottom(head);
+}
+
+void BinaryTreeMirrorRecursion(Node *head)
+{
+	if (head != NULL)
+	{
+		Node *tmp = head->Left;
+		head->Left = head->Right;
+		head->Right = tmp;
+		BinaryTreeMirrorRecursion(head->Left);
+		BinaryTreeMirrorRecursion(head->Right);
+	}
 }
 
 
@@ -192,15 +204,28 @@ int main()
 
 	printf("DepthFirst\n");
 	DepthFirst(node8);
+
 	printf("\n\n");
 	printf("TopToBottom\n");
 	TopToBottom(node8);
+
 	printf("\n\n");
 	printf("BottomToTop\n");
 	BottomToTop(node8);
+
 	printf("\n\n");
-	printf("BinaryTreeMirror\n");
-	BinaryTreeMirror(node8);
+	printf("BinaryTreeMirrorNoRecursion\n");
+	BinaryTreeMirrorNoRecursion(node8);
+	printf("\n");
+	BinaryTreeMirrorNoRecursion(node8);
+
+	printf("\n\n");
+	printf("BinaryTreeMirrorRecursion\n");
+	BinaryTreeMirrorRecursion(node8);
+	TopToBottom(node8);
+	printf("\n");
+	BinaryTreeMirrorRecursion(node8);
+	TopToBottom(node8);
 
 //	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 	return 0;
