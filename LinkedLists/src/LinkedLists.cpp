@@ -78,23 +78,22 @@ void LinkedListReverse(struct Node **head)
 	return;
 }
 
-void DoubleLinkedListReversal(Node **head)
+void ReverseDoubleLinkedList(Node **head)
 {
-	Node *tmp1 = *head;
-	if (!tmp1) return;
-	Node *tmp2 = tmp1->next;
+	if (*head == NULL || (*head)->next == NULL) return;
 
-	while (tmp2)
+	Node *prev = NULL;
+	Node *curr = *head;
+
+	while (curr != NULL)
 	{
-		tmp1->next = tmp1->prev;
-		tmp1->prev = tmp2;
-		tmp1 = tmp2;
-		tmp2 = tmp2->next;
+		Node *tmp = curr->next;
+		curr->next = prev;
+		curr->prev = tmp;
+		prev = curr;
+		curr = tmp;
 	}
-	tmp1->next = tmp1->prev;
-	tmp1->prev = NULL;
-
-	*head = tmp1;
+	*head = prev;
 }
 
 Node* ReturnNthNodeFromEnd(Node *head, int n)
@@ -221,6 +220,7 @@ int main(void)
 	node01->next = node02;
 
 	struct Node* head1 = node1;
+	struct Node* tail1 = node7;
 	struct Node* head01 = node01;
 	PrintLinkedList(head1);
 
@@ -233,12 +233,10 @@ int main(void)
 //	printf("\n");
 //	LinkedListReverse(&head1);
 //	PrintLinkedList(head1);
-//
-//	printf("\nDouble Linked List Reversal\n");
-//	DoubleLinkedListReversal(&head1);
-//	PrintLinkedList(head1);
-//	DoubleLinkedListReversal(&head1);
-//	PrintLinkedList(head1);
+
+	printf ("ReverseDoubleLinkedList\n");
+	ReverseDoubleLinkedList(&head1);
+	PrintLinkedList(head1);
 //
 //	printf("Merge Linked Lists\n");
 //	PrintLinkedList(head01);
@@ -248,12 +246,12 @@ int main(void)
 //	printf ("ReverseKAlternateNodes\n");
 //	PrintLinkedList(ReverseKAlternateNodes(head1, 2));
 
-	printf ("FrontBackSplit\n");
-	struct Node *front;
-	struct Node *back;
-	FrontBackSplit(head1, &front, &back);
-	PrintLinkedList(front);
-	PrintLinkedList(back);
+//	printf ("FrontBackSplit\n");
+//	struct Node *front;
+//	struct Node *back;
+//	FrontBackSplit(head1, &front, &back);
+//	PrintLinkedList(front);
+//	PrintLinkedList(back);
 
 	puts("!!!Linked Lists!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
