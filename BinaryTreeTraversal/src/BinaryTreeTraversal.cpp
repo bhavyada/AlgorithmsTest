@@ -108,34 +108,26 @@ void TopToBottom(Node *head)
 
 void BottomToTop(Node *head)
 {
-	NodeStack printStack;
-	NodeQue saveQue;
+	NodeStack stack;
+	NodeQue que;
 
-	if (head != NULL) printStack.StackPush(head);
-	else return;
-
-	Node *currentNode = head;
-
-	while(currentNode)
+	while (head)
 	{
-		if (currentNode->Right)
+		stack.StackPush(head);
+		if (head->Right)
 		{
-			printStack.StackPush(currentNode->Right);
-			saveQue.QuePush(currentNode->Right);
+			que.QuePush(head->Right);
 		}
-		if (currentNode->Left)
+		if (head->Left)
 		{
-			printStack.StackPush(currentNode->Left);
-			saveQue.QuePush(currentNode->Left);
+			que.QuePush(head->Left);
 		}
-		currentNode = saveQue.QuePull();
+		head = que.QuePull();
 	}
 
-	currentNode = printStack.StackPop();
-	while (currentNode)
+	while (head = stack.StackPop())
 	{
-		printf("%d ", currentNode->Value);
-		currentNode = printStack.StackPop();
+		printf("%d ", head->Value);
 	}
 }
 
