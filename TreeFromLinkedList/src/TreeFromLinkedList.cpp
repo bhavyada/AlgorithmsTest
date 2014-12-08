@@ -134,6 +134,23 @@ TNode * TreeFromLinkedList(TNode *head)
 	return midNode;
 }
 
+TNode * RecursiveCreateTree(TNode *ptrArr[], TNode *head, int count)
+{
+
+}
+
+TNode * TreeFromLinkedList_Count(TNode *head)
+{
+	int count = 0;
+	TNode* ptrArr[1000];
+	while (head != NULL)
+	{
+		ptrArr[count++] = head;
+		head = head->Right;
+	}
+
+	return (RecursiveCreateTree(ptrArr, head, count));
+}
 
 
 int main()
