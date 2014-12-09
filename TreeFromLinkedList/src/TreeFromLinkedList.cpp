@@ -134,12 +134,27 @@ TNode * TreeFromLinkedList(TNode *head)
 	return midNode;
 }
 
-TNode * RecursiveCreateTree(TNode *ptrArr[], TNode *head, int count)
+TNode * RecursiveCreateTree_ArrCount(TNode *ptrArr[], int count)
 {
+	assert(count >= 0);
+	if (count == 0) return NULL;
+	if (count == 1)
+	{
+		ptrArr[0]->Left = NULL;
+		ptrArr[0]->Right = NULL;
+		return ptrArr[0];
+	}
 
+	TNode *mid = ptrArr[(count/2) /*no +1*/];
+	mid->Left = RecursiveCreateTree_ArrCount(ptrArr, count/2);
+	if ((count - (count/2) - 1) >= 0)
+	{
+		mid->Right = RecursiveCreateTree_ArrCount(&(ptrArr[(count/2) + 1]), count - (count/2) - 1);
+	}
+	return mid;
 }
 
-TNode * TreeFromLinkedList_Count(TNode *head)
+TNode * TreeFromLinkedList_ArrCount(TNode *head)
 {
 	int count = 0;
 	TNode* ptrArr[1000];
@@ -149,7 +164,7 @@ TNode * TreeFromLinkedList_Count(TNode *head)
 		head = head->Right;
 	}
 
-	return (RecursiveCreateTree(ptrArr, head, count));
+	return (RecursiveCreateTree_ArrCount(ptrArr, count));
 }
 
 
@@ -185,7 +200,10 @@ int main()
 
 	PrintLinkedList(node1);
 
-	struct TNode* root = TreeFromLinkedList(node1);
+//	struct TNode* root = TreeFromLinkedList(node1);
+//	TopToBottom(root);
+
+	struct TNode* root = TreeFromLinkedList_ArrCount(node1);
 	TopToBottom(root);
 
 	return 0;
