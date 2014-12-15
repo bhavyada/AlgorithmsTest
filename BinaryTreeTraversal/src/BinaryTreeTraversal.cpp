@@ -83,6 +83,16 @@ void DepthFirst(Node *head)
 	}
 }
 
+void DepthFirstRecursive(Node *head)
+{
+	if (head)
+	{
+		printf("%d ", head->Value);
+		DepthFirstRecursive(head->Left);
+		DepthFirstRecursive(head->Right);
+	}
+}
+
 void TopToBottom(Node *head)
 {
 	NodeQue saveQue;
@@ -196,6 +206,10 @@ int main()
 
 	printf("DepthFirst\n");
 	DepthFirst(node8);
+
+	printf("\n\n");
+	printf("DepthFirstRecursive\n");
+	DepthFirstRecursive(node8);
 
 	printf("\n\n");
 	printf("TopToBottom\n");
