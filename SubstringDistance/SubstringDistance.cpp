@@ -26,6 +26,13 @@ int DistanceInit(char *strFrom, char *strTo)
 	bool toUseFlag[toLen] = malloc((toLen / 8) + 1);
 
 	char* compString = (fromLen > toLen) ? strFrom : strTo;
+	int len = (fromLen > toLen) ? fromLen : toLen;
+
+	for (int i = 0; i < len; ++i)
+	{
+
+	}
+
 }
 
 int main(void)
