@@ -61,21 +61,44 @@ struct Node* MergeLinkedLists(struct Node *l1, struct Node *l2)
 	return temp.next;
 }
 
-void LinkedListReverse(struct Node **head)
+void LinkedListReverse(Node **head)
 {
-	struct Node *tmp2 = *head;
+	Node *tmp2 = *head;
 	if ((tmp2 == NULL) || (tmp2->next == NULL)) return;
-	struct Node *tmp1 = tmp2->next;
+	Node *tmp1 = tmp2->next;
 	tmp2->next = NULL;
 	while (tmp1 != NULL)
 	{
-		struct Node* tmp = tmp1->next;
+		Node* tmp = tmp1->next;
 		tmp1->next = tmp2;
 		tmp2 = tmp1;
 		tmp1 = tmp;
 	}
 	*head = tmp2;
 	return;
+}
+
+Node* RecursiveCallLinkedListReverse(Node **head, Node *curr)
+{
+	if (curr->next != NULL)
+	{
+		Node *prev = RecursiveCallLinkedListReverse(head, curr->next);
+		prev->next = curr;
+	}
+	else
+	{
+		*head = curr;
+	}
+	return curr;
+}
+
+void LinkedListReverseRecursive(Node **head)
+{
+	if ((*head != NULL) && ((*head)->next != NULL))
+	{
+		Node *last = RecursiveCallLinkedListReverse(head, *head);
+		last->next = NULL;
+	}
 }
 
 void ReverseDoubleLinkedList(Node **head)
@@ -222,7 +245,8 @@ int main(void)
 	struct Node* head1 = node1;
 	struct Node* tail1 = node7;
 	struct Node* head01 = node01;
-	PrintLinkedList(head1);
+
+//	PrintLinkedList(head1);
 
 //	printf("\nReturn Nth node from End: ");
 //	printf("%d\n\n", (ReturnNthNodeFromEnd(node1, 3))->value);
@@ -234,10 +258,10 @@ int main(void)
 //	LinkedListReverse(&head1);
 //	PrintLinkedList(head1);
 
-	printf ("ReverseDoubleLinkedList\n");
-	ReverseDoubleLinkedList(&head1);
-	PrintLinkedList(head1);
-//
+//	printf ("ReverseDoubleLinkedList\n");
+//	ReverseDoubleLinkedList(&head1);
+//	PrintLinkedList(head1);
+
 //	printf("Merge Linked Lists\n");
 //	PrintLinkedList(head01);
 //	struct Node* mergedHead = MergeLinkedLists(head1, head01);
@@ -252,6 +276,11 @@ int main(void)
 //	FrontBackSplit(head1, &front, &back);
 //	PrintLinkedList(front);
 //	PrintLinkedList(back);
+
+	printf("Linked Lists Reverse Recursive\n");
+	PrintLinkedList(head01);
+	LinkedListReverseRecursive(&head01);
+	PrintLinkedList(head01);
 
 	puts("!!!Linked Lists!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
